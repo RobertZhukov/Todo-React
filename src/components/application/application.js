@@ -17,7 +17,8 @@ export default class Application extends React.Component {
       this.createTodoItem("Create React project"),
       this.createTodoItem("Have lunch"),
     ],
-    searchData: "",
+	searchData: "",
+	filter: "all"
   };
 
   createTodoItem(label) {
@@ -80,13 +81,13 @@ export default class Application extends React.Component {
     });
   };
 
-  searchItem = (todoData, term) => {
-    if (term.length === 0) {
+  searchItem = (todoData, searchData) => {
+    if (searchData.length === 0) {
       return todoData;
     }
 
     return todoData.filter((el) => {
-      return el.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
+      return el.label.toLowerCase().indexOf(searchData.toLowerCase()) > -1;
     });
   };
 
@@ -96,20 +97,40 @@ export default class Application extends React.Component {
 	  });
   };
 
+  onFilterChange = (filter) => {
+	  this.setState( {
+		filter: filter
+	  });
+  };
+
+  filter = (todoData, filter) => {
+	switch(filter){
+		case 'all':
+			return todoData
+		case 'active':
+			return todoData.filter((el) => el.done === false)
+		case 'done':
+			return todoData.filter((el) => el.done === true)
+		default: 
+			return todoData
+	}
+  };
+
   render() {
-    const { todoData, searchData } = this.state;
+    const { todoData, searchData, filter } = this.state;
 
-    const visibleItem = this.searchItem(todoData, searchData);
+	const visibleItem = this.filter(this.searchItem(todoData, searchData), filter);
     const doneCount = todoData.filter((el) => el.done === true).length;
-
-    const todoCount = todoData.length - doneCount;
+	const todoCount = todoData.length - doneCount;
 
     return (
       <div className="todo-app">
         <AppHeader toDo={todoCount} done={doneCount} />
         <div className="top-panel d-flex">
           <SearchPanel stateSearch={this.stateSearch}/>
-          <ItemStatusFilter />
+          <ItemStatusFilter 
+		  	filter={filter}
+			onFilterChange={this.onFilterChange} />
         </div>
         <TodoList
           todos={visibleItem}

@@ -1,7 +1,7 @@
-# Todo-React-Redux
+# Todo-React
 
 
-Project view: https://codesandbox.io/s/github/RobertZhukov/Todo-React-Redux
+Project view: https://codesandbox.io/s/github/RobertZhukov/Todo-React
 
 The app will help you remember what to do.
 

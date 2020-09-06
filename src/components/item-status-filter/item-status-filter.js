@@ -28,6 +28,6 @@ export default class ItemStatusFilter extends React.Component {
       );
     });
 
-    return <div className="btn-group">{buttons}</div>;
+    return <div className="btn-group">{buttons}</div>
   }
 }

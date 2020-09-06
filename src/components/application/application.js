@@ -5,6 +5,7 @@ import AppHeader from "../app-header/app-header";
 import SearchPanel from "../search-panel/search-panel";
 import ItemStatusFilter from "../item-status-filter/item-status-filter";
 import ItemAddForm from "../item-add-form/item-add-form";
+import InfoPanel from "../info-panel/info-panel";
 
 import "./application.css";
 
@@ -15,7 +16,8 @@ export default class Application extends React.Component {
     todoData: [
       this.createTodoItem("To drink coffee"),
       this.createTodoItem("Create React project"),
-      this.createTodoItem("Have lunch"),
+	  this.createTodoItem("Have lunch"),
+	  this.createTodoItem("Watch the video in English"),
     ],
 	searchData: "",
 	filter: "all"
@@ -126,11 +128,11 @@ export default class Application extends React.Component {
     return (
       <div className="todo-app">
         <AppHeader toDo={todoCount} done={doneCount} />
-        <div className="top-panel d-flex">
-          <SearchPanel stateSearch={this.stateSearch}/>
-          <ItemStatusFilter 
-		  	filter={filter}
-			onFilterChange={this.onFilterChange} />
+		<div className="top-panel">
+			<SearchPanel stateSearch={this.stateSearch}/>
+			<ItemStatusFilter 
+				filter={filter}
+				onFilterChange={this.onFilterChange} />
         </div>
         <TodoList
           todos={visibleItem}
@@ -139,6 +141,7 @@ export default class Application extends React.Component {
           onToggleDone={this.onToggleDone}
         />
         <ItemAddForm onItemAdded={this.addItem} />
+		<InfoPanel />
       </div>
     );
   }

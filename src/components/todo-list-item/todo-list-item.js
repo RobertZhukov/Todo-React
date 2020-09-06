@@ -10,7 +10,7 @@ const TodoListItem = ({
   done,
   important,
 }) => {
-  let classNames = "todo-list-item";
+  let classNames = "todo-list-item d-flex";
   if (done) {
     classNames += " done";
   }
@@ -20,25 +20,28 @@ const TodoListItem = ({
 
   return (
     <span className={classNames}>
-      <span className="todo-list-item-label" onClick={onToggleDone}>
-        {label}
-      </span>
+      <div className="multistring">
+        <span className="todo-list-item-label" onClick={onToggleDone}>
+          {label}
+        </span>
+      </div>
+		<div>	
+			<button
+			type="button"
+			className="btn btn-outline-success btn-sm float-right"
+			onClick={onToggleImportant}
+		>
+			<i className="fa fa-exclamation" />
+		</button>
 
-      <button
-        type="button"
-        className="btn btn-outline-success btn-sm float-right"
-        onClick={onToggleImportant}
-      >
-        <i className="fa fa-exclamation" />
-      </button>
-
-      <button
-        type="button"
-        className="btn btn-outline-danger btn-sm float-right"
-        onClick={onDeleted}
-      >
-        <i className="fa fa-trash-o" />
-      </button>
+		<button
+			type="button"
+			className="btn btn-outline-danger btn-sm float-right"
+			onClick={onDeleted}
+		>
+			<i className="fa fa-trash-o" />
+		</button>
+		</div>
     </span>
   );
 };

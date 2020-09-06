@@ -6,3 +6,20 @@
 	width: 284px;
 	margin-right: 3px;
 }
+
+/* media */
+@media (max-width: 400px) {
+
+	.form{
+		flex-direction: column;
+	}
+
+	.item-add-form input {
+		width: auto;
+		margin-right: 0;
+	}
+
+	.btn {
+		margin-top: 5px;
+	}
+}
